@@ -94,3 +94,88 @@ BEGIN
 END;
 $$
 
+-- 1.3 Faça um programa que opera de acordo com o seguinte menu.
+-- Opções:
+-- 1 - Soma
+-- 2 - Subtração
+-- 3 - Multiplicação
+-- 4 - Divisão
+-- Cada operação envolve dois números inteiros. O resultado deve ser exibido no formato
+-- op1 op op2 = res
+
+-- Com if
+DO $$
+DECLARE
+valor1 INT;
+valor2 INT;
+opcao INT := 0;
+BEGIN
+	valor1 := valor_aleatorio_entre(1,99);
+	valor2 := valor_aleatorio_entre(1,99);
+	RAISE NOTICE 'Dentre as opções:';
+	RAISE NOTICE '
+	1 - Soma
+	2 - Subtração
+	3 - Multiplicação
+	4 - Divisão
+';
+	opcao = opcao + 1;
+	IF opcao = 1 THEN
+		RAISE NOTICE '% + % = %', valor1, valor2, valor1 + valor2;
+	opcao = opcao + 1;
+	END IF;
+	IF opcao = 2 THEN
+		RAISE NOTICE '% - % = %', valor1, valor2, valor1 - valor2;
+	END IF;
+	opcao = opcao + 1;
+	IF opcao = 3 THEN
+		RAISE NOTICE '% * % = %', valor1, valor2, valor1 * valor2;
+	opcao = opcao + 1;
+	END IF;
+	IF opcao = 4 THEN
+		RAISE NOTICE '% / % = %', valor1, valor2, valor1 / valor2;
+	END IF;
+END;
+$$
+-- Com case
+DO $$
+DECLARE
+    valor1 INT;
+    valor2 INT;
+    opcao INT := 0;
+BEGIN
+    valor1 := valor_aleatorio_entre(1,99);
+    valor2 := valor_aleatorio_entre(1,99);
+    RAISE NOTICE 'Dentre as opções:';
+    RAISE NOTICE '
+    1 - Soma
+    2 - Subtração
+    3 - Multiplicação
+    4 - Divisão
+    ';
+	
+    opcao := opcao + 1;
+	CASE opcao
+        WHEN 1 THEN
+            RAISE NOTICE '% + % = %', valor1, valor2, valor1 + valor2;
+		END CASE;
+    opcao := opcao + 1;
+	CASE opcao
+        WHEN 2 THEN
+            RAISE NOTICE '% - % = %', valor1, valor2, valor1 - valor2;
+		END CASE;
+    opcao := opcao + 1;
+	CASE opcao
+        WHEN 3 THEN
+            RAISE NOTICE '% * % = %', valor1, valor2, valor1 * valor2;
+		END CASE;
+    opcao := opcao + 1;
+	CASE opcao
+        WHEN 4 THEN
+            RAISE NOTICE '% / % = %', valor1, valor2, valor1 / valor2;
+    ELSE
+            RAISE NOTICE 'Opção inválida';
+    END CASE;
+END;
+$$;
+
