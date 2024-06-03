@@ -179,3 +179,41 @@ BEGIN
 END;
 $$;
 
+-- 1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor
+--da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. Faça um
+--programa que, dado o valor do produto, calcula o valor de venda.
+
+-- COM IF
+DO $$
+DECLARE
+valor INT;
+lucro INT;
+BEGIN
+	valor := valor_aleatorio_entre(10, 30);
+	IF valor >= 20 THEN 
+		lucro := valor * 0.3;
+		RAISE NOTICE 'como o valor da venda foi % o lucro do vendedor foi %', valor, valor + lucro;
+	ELSE
+		lucro := valor * 0.45;
+		RAISE NOTICE 'como o valor da venda foi % o lucro do vendedor foi %', valor, valor + lucro;
+	END IF;
+END;
+$$
+
+-- COM CASE
+DO $$
+DECLARE
+valor INT;
+lucro INT;
+BEGIN
+	valor := valor_aleatorio_entre(10, 30);
+	CASE 
+		WHEN valor BETWEEN 20 AND 30 THEN 
+			lucro := valor * 0.3;
+			RAISE NOTICE 'como o valor da venda foi % o lucro do vendedor foi %', valor, valor + lucro;
+	ELSE
+		lucro := valor * 0.45;
+		RAISE NOTICE 'como o valor da venda foi % o lucro do vendedor foi %', valor, valor + lucro;
+	END CASE;
+END;
+$$
