@@ -217,3 +217,43 @@ BEGIN
 	END CASE;
 END;
 $$
+-- 1.5 Resolva o problema disponível no link a seguir.
+-- COM IF
+DO $$
+DECLARE
+salario NUMERIC(10, 2);
+BEGIN
+	salario := valor_aleatorio_entre(0, 4000);
+	IF salario <= 400 THEN
+		RAISE NOTICE 'o salario que era % recebeu um aumento de 15/100 e ficou %', salario, salario + (salario * 0.15);
+	ELSIF salario > 400 AND salario <= 800 THEN
+		RAISE NOTICE 'o salario que era % recebeu um aumento de 12/100 e ficou %', salario, salario + (salario * 0.12);
+	ELSIF salario > 800 AND salario <= 1200 THEN
+		RAISE NOTICE 'o salario que era % recebeu um aumento de 10/100 e ficou %', salario, salario + (salario * 0.10);
+	ELSIF salario > 1200 AND salario <= 2000 THEN
+		RAISE NOTICE 'o salario que era % recebeu um aumento de 7/100 e ficou %', salario, salario + (salario * 0.07);
+	ELSE
+		RAISE NOTICE 'o salario que era % recebeu um aumento de 4/100 e ficou %', salario, salario + (salario * 0.04);
+	END IF;
+END;
+$$
+-- COM CASE
+DO $$
+DECLARE
+salario NUMERIC(10, 2);
+BEGIN
+	salario := valor_aleatorio_entre(0, 4000);
+	CASE 
+		WHEN salario BETWEEN 0 AND 400 THEN
+			RAISE NOTICE 'o salario que era % recebeu um aumento de 15/100 e ficou %', salario, salario + (salario * 0.15);
+		WHEN salario BETWEEN 400.01 AND 800 THEN
+			RAISE NOTICE 'o salario que era % recebeu um aumento de 12/100 e ficou %', salario, salario + (salario * 0.12);
+		WHEN salario BETWEEN 800.01 AND 1200 THEN
+			RAISE NOTICE 'o salario que era % recebeu um aumento de 10/100 e ficou %', salario, salario + (salario * 0.10);
+		WHEN salario BETWEEN 1200.01 AND 2000 THEN
+			RAISE NOTICE 'o salario que era % recebeu um aumento de 7/100 e ficou %', salario, salario + (salario * 0.07);
+		ELSE
+			RAISE NOTICE 'o salario que era % recebeu um aumento de 4/100 e ficou %', salario, salario + (salario * 0.04);
+	END CASE;
+END;
+$$
